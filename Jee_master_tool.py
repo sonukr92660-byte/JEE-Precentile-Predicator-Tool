@@ -34,7 +34,7 @@ def check_jee_eligibility():
         return
 
     try:
-        12th_per = float(input("Enter Class 12th Aggregate %: "))
+        per_12th = float(input("Enter Class 12th Aggregate %: "))
         top20 = input("Are you in Top 20 percentile of your board? (yes/no): ").strip().lower()
     except ValueError:
         print("Invalid percentage input.")
@@ -42,10 +42,10 @@ def check_jee_eligibility():
 
     is_board_ok = False
     if cat in ["SC", "ST", "PwBD"]:
-        if 12th_per >= 65.0 or top20 == "yes":
+        if per_12th >= 65.0 or top20 == "yes":
             is_board_ok = True
     else:
-        if 12th_per >= 75.0 or top20 == "yes":
+        if per_12th >= 75.0 or top20 == "yes":
             is_board_ok = True
 
     if not is_board_ok:
@@ -87,12 +87,13 @@ def check_jee_eligibility():
 
         final_sum = p_val + c_val + m_val
         
+        # यहाँ डेटा ठीक किया गया है: [सब्जेक्ट कटऑफ मार्क्स, एग्रीगेट कटऑफ मार्क्स]
         adv_limits = {
-            "GENERAL":,
-            "EWS":,
-            "OBC-NCL":,
-            "SC":,
-            "ST":,
+            "GENERAL": [8, 92],
+            "EWS": [7, 82],
+            "OBC-NCL": [7, 82],
+            "SC": [4, 46],
+            "ST": [4, 46],
             "PwBD": [4, 46]
         }
 
@@ -149,3 +150,4 @@ def start():
 
 if __name__ == "__main__":
     start()
+
