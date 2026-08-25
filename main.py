@@ -7,7 +7,7 @@ st.write("Welcome! This tool checks your JEE Main and Advanced eligibility crite
 st.write("### 1. Predict Percentile & Rank")
 score = st.number_input("Enter your expected marks out of 300:", min_value=0.0, max_value=300.0, value=140.0)
 
-# परसेंटाइल का आपका खुद का बनाया हुआ सिंपल लॉजिक
+# परसेंटाइल निकालने का लॉजिक
 res = "Below 70.0"
 p_num = 65.0  
 
@@ -41,7 +41,7 @@ elif score >= 50:
 
 st.write("Your expected percentile range is:", res)
 
-# सीधा छात्र वाला गणित (12 लाख कुल छात्र मानकर ऑल इंडिया रैंक)
+# कुल 12 lakh छात्र मानकर ऑल इंडिया रैंक
 mains_rank = int((100.0 - p_num) * 12000)
 if mains_rank < 1:
     mains_rank = 1
@@ -54,7 +54,7 @@ st.write("### 2. Check Complete JEE Eligibility")
 
 cat = st.selectbox("Enter your category:", ["GENERAL", "EWS", "OBC-NCL", "SC", "ST", "PwBD"])
 
-# साधारण कैटेगरी रैंक कैलकुलेशन
+# कैटेगरी रैंक कैलकुलेशन
 cat_rank = mains_rank
 if cat == "OBC-NCL":
     cat_rank = int(mains_rank * 0.27)
@@ -116,17 +116,18 @@ else:
 
         final_sum = p_val + c_val + m_val
         
+        # डिक्शनरी डेटा को एरर-फ्री एरे वैल्यू दी गई है [सब्जेक्ट कटऑफ, टोटल कटऑफ]
         adv_limits = {
-            "GENERAL":,
-            "EWS":,
-            "OBC-NCL":,
-            "SC":,
-            "ST":,
-            "PwBD":
+            "GENERAL": [8, 92],
+            "EWS": [7, 82],
+            "OBC-NCL": [7, 82],
+            "SC": [4, 46],
+            "ST": [4, 46],
+            "PwBD": [4, 46]
         }
 
-        sub_limit = adv_limits[cat]
-        agg_limit = adv_limits[cat]
+        sub_limit = adv_limits[cat][0]
+        agg_limit = adv_limits[cat][1]
         
         st.write("Passing rules for your category:")
         st.write("- Minimum marks required in EACH subject:", sub_limit)
@@ -144,7 +145,7 @@ else:
         if chk_sub and chk_agg:
             st.write("### Congratulations! You qualified for IIT Rank List!")
             
-            # बिल्कुल सिंपल और छात्र जैसा एडवांस रैंक प्रेडिक्शन लॉजिक
+            # सिंपल एडवांस रैंक लॉजिक
             adv_rank = 60000
             if final_sum >= 300:
                 adv_rank = 100
@@ -163,7 +164,7 @@ else:
                 
             st.write("Your expected JEE Advanced All India Rank (CRL) is around:", adv_rank)
             
-            # सिंपल एडवांस कैटेगरी रैंक लॉजिक
+            # एडवांस कैटेगरी रैंक लॉजिक
             adv_cat_rank = adv_rank
             if cat == "OBC-NCL":
                 adv_cat_rank = int(adv_rank * 0.25)
@@ -189,6 +190,7 @@ else:
                 st.write("- Total score is below required aggregate.")
     else:
         st.write("Advanced analysis locked because JEE Main cutoff not cleared.")
+
 
 
 
